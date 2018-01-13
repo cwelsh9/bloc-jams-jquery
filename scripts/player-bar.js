@@ -8,7 +8,7 @@
 >>>>>>> checkpoint-19-player-bar
 {
   $('button#play-pause').on('click', function() {
-    player.playPause();
+    helper.playPauseAndUpdate();
   $(this).attr('playState', player.playState);
 <<<<<<< HEAD
 });
@@ -26,7 +26,7 @@
     if (nextSongIndex > album.songs.length) { return; }
 <<<<<<< HEAD
 
-    player.playPause(nextSong);
+    helper.playPauseAndUpdate(nextSong);
   });
 
   $('button#previous').on('click', function () {
@@ -36,12 +36,12 @@
       const previousSong = album.songs[previousSongIndex];
       if (previousSongIndex < album.songs[0]) { return; }
 
-      player.playPause(previousSong);
+      helper.playPauseAndUpdate(previousSong);
     };
   });
 =======
 
-    player.playPause(nextSong);
+    helper.playPauseAndUpdate(nextSong);
   });
 >>>>>>> checkpoint-19-player-bar
 
@@ -51,5 +51,10 @@
     const duration = player.getDuration();
     const percent = (currentTime / duration) * 100;
     $('#time-control input').val(percent);
+  }, 1000);
+
+  setInterval( () => {
+    const currentVolume = player.setVolume(event.target.value);
+    $('#volume-control input').val(percent);
   }, 1000);
 }
