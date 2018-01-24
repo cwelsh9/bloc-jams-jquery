@@ -25,6 +25,7 @@ class Player {
       this.currentlyPlaying = song;
       this.playState = 'stopped';
       this.soundObject = new buzz.sound(this.currentlyPlaying.soundFileUrl);
+
     }
     if (this.playState === 'paused' || this.playState === 'stopped') {
       this.soundObject.setVolume( this.volume );
@@ -49,7 +50,18 @@ class Player {
   }
 
   prettyTime (timeInSeconds) {
-  }
+    var secondNum = parseInt(timeInSeconds, 10);
+    var hours = Math.floor(secondNum / 3600);
+    var minutes = Math.floor(secondNum - (hours * 3600) / 60);
+    var seconds = secondNum - (hours * 3600) - (minutes * 60);
+
+    if (hours < 10) { hours = "0" + hours; }
+    if (minutes < 10) { minutes = "0" + minutes; }
+    if (seconds < 10) { seconds = "0" + seconds; }
+    var result = hours + ":" + minutes + ":" + seconds;
+
+    return result;
+  };
 }
 
 const player = new Player();
